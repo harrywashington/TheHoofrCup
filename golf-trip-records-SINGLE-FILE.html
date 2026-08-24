@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Golf Trip Records</title>
+  <meta name="description" content="An annual guys golf trip: the lineup, the players, and the all-time record book." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzBlM2IyOSIvPgogIDxwYXRoIGQ9Ik0xMyA4djE2IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMTMgOC4yYzMuNC0xLjkgNS42IDEuMiA4LjQtLjJ2Ni4yYy0yLjggMS40LTUtMS43LTguNC4yIiBmaWxsPSIjZmZmIi8+CiAgPGNpcmNsZSBjeD0iMTMiIGN5PSIyNC41IiByPSIxLjYiIGZpbGw9IiNmZmYiLz4KPC9zdmc+Cg==" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet" />
+  <style>
+/* =========================================================================
+   Golf Trip Records — Jobs-era Apple homage
+   Light ground, deep pine ink, single Myriad-descended sans (Source Sans 3).
+   ========================================================================= */
+
+/* ---- Tokens ---- */
+:root {
+  --bg:          #ffffff;
+  --bg-alt:      #f3f6f3;
+  --ink:         #0e3b29;   /* deep pine — headings, brand */
+  --ink-soft:    #38504590; /* transparent for layering */
+  --ink-body:    #385045;   /* secondary text */
+  --muted:       #6f847a;   /* captions, labels */
+  --line:        #e4eae5;   /* hairlines */
+  --line-strong: #cfd9d1;
+  --green:       #14432f;
+  --green-brt:   #1e7a4d;   /* interactive accent, used sparingly */
+  --green-wash:  #eaf1ec;
+  --white:       #ffffff;
+  --gold:        #b08a3e;   /* champion marker, quiet */
+
+  --maxw: 1080px;
+  --pad:  clamp(1.25rem, 5vw, 2.5rem);
+  --sect: clamp(4.5rem, 10vw, 8.5rem);
+
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+  font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink-body);
+  font-size: 17px;
+  line-height: 1.55;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-variant-numeric: tabular-nums;
+}
+
+h1, h2, h3, h4 { color: var(--ink); font-weight: 600; line-height: 1.08; letter-spacing: -0.02em; }
+a { color: inherit; text-decoration: none; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad); }
+
+.eyebrow {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--green-brt);
+}
+
+/* ---- Nav ---- */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad);
+  height: 58px; display: flex; align-items: center; justify-content: space-between;
+}
+.brand { display: flex; align-items: center; gap: 0.6rem; }
+.brand svg { display: block; width: 26px; height: 26px; }
+.brand .brand-name {
+  font-weight: 600; color: var(--ink); font-size: 1.02rem; letter-spacing: -0.01em;
+}
+.nav-links { display: flex; gap: clamp(1.1rem, 4vw, 2.4rem); align-items: center; }
+.nav-links a {
+  font-size: 0.95rem; font-weight: 500; color: var(--ink-body);
+  position: relative; padding: 4px 0; transition: color 0.25s var(--ease);
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.active { color: var(--ink); }
+.nav-links a.active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+  background: var(--green-brt); border-radius: 2px;
+}
+
+/* ---- Hero ---- */
+.hero { position: relative; overflow: hidden; background: var(--bg); }
+.hero-contours {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; opacity: 0.5;
+}
+.hero-inner {
+  position: relative; z-index: 1;
+  max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad);
+  padding-block: clamp(4.5rem, 13vw, 9rem);
+  text-align: center;
+}
+.hero h1 {
+  font-size: clamp(2.7rem, 7.5vw, 5.4rem);
+  letter-spacing: -0.035em; line-height: 0.98;
+  color: var(--ink); margin-top: 0.9rem;
+}
+.hero .sub {
+  font-size: clamp(1.05rem, 2.2vw, 1.4rem); color: var(--ink-body);
+  max-width: 40ch; margin: 1.4rem auto 0; font-weight: 400;
+}
+.hero .meta {
+  margin-top: 1.6rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem;
+  justify-content: center; color: var(--muted); font-size: 0.95rem; font-weight: 500;
+}
+.hero .meta span { display: inline-flex; align-items: center; gap: 0.45rem; }
+.hero .meta svg { width: 15px; height: 15px; opacity: 0.7; flex: none; }
+
+/* countdown */
+.countdown {
+  margin-top: 2.6rem; display: flex; justify-content: center; gap: clamp(0.8rem, 3vw, 2rem);
+}
+.countdown .unit { text-align: center; min-width: 52px; }
+.countdown .num {
+  font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 600; color: var(--ink);
+  letter-spacing: -0.03em; line-height: 1;
+}
+.countdown .lbl {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--muted); margin-top: 0.4rem;
+}
+
+/* ---- Sections ---- */
+.section { padding-block: var(--sect); }
+.section.alt { background: var(--bg-alt); }
+.section-head { max-width: 60ch; margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
+.section-head.center { margin-inline: auto; text-align: center; }
+.section-head h2 { font-size: clamp(1.9rem, 4vw, 2.9rem); letter-spacing: -0.03em; margin-top: 0.7rem; }
+.section-head p { margin-top: 0.9rem; color: var(--ink-body); font-size: 1.08rem; }
+
+/* ---- Lineup (trip cards) ---- */
+.lineup { display: grid; gap: clamp(1rem, 2.5vw, 1.6rem); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.trip-card {
+  position: relative; background: var(--white); border: 1px solid var(--line);
+  border-radius: var(--r-lg); padding: 2rem 1.9rem; overflow: hidden;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+  display: flex; flex-direction: column; min-height: 320px;
+}
+.trip-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 50px -24px rgba(14,59,41,0.35);
+  border-color: var(--line-strong);
+}
+.trip-card .year {
+  font-size: 3.4rem; font-weight: 600; color: var(--ink); letter-spacing: -0.04em; line-height: 1;
+}
+.trip-card .status {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600;
+  padding: 0.3rem 0.6rem; border-radius: 100px; align-self: flex-start;
+}
+.trip-card .status.done { background: var(--green-wash); color: var(--green); }
+.trip-card .status.next { background: var(--ink); color: var(--white); }
+.trip-card .tc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.trip-card h3 { font-size: 1.5rem; margin-top: 1.2rem; letter-spacing: -0.02em; }
+.trip-card .courses {
+  margin-top: 0.7rem; color: var(--muted); font-size: 0.95rem; line-height: 1.45;
+}
+.trip-card .champs { margin-top: auto; padding-top: 1.4rem; border-top: 1px solid var(--line); display: grid; gap: 0.55rem; }
+.trip-card .champ-row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; font-size: 0.95rem; }
+.trip-card .champ-row .k { color: var(--muted); font-weight: 500; display: inline-flex; align-items: center; gap: 0.4rem; }
+.trip-card .champ-row .v { color: var(--ink); font-weight: 600; }
+.trip-card .champ-row .flag { width: 13px; height: 13px; color: var(--gold); }
+.trip-card .when { margin-top: auto; padding-top: 1.4rem; border-top: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 1.05rem; }
+.trip-card .when small { display: block; color: var(--muted); font-weight: 500; font-size: 0.85rem; margin-top: 0.2rem; letter-spacing: 0.02em; }
+
+/* ---- Stat band ---- */
+.statband { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; text-align: center; }
+.statband .stat .n { font-size: clamp(2.4rem, 5vw, 3.4rem); font-weight: 600; color: var(--ink); letter-spacing: -0.04em; line-height: 1; }
+.statband .stat .l { margin-top: 0.6rem; color: var(--muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+
+/* ---- Players grid ---- */
+.players-grid { display: grid; gap: clamp(0.9rem, 2vw, 1.3rem); grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+.player-card {
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--r-md);
+  padding: 1.5rem 1.5rem 1.35rem; transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+.player-card:hover { transform: translateY(-3px); box-shadow: 0 14px 40px -22px rgba(14,59,41,0.32); border-color: var(--line-strong); }
+.player-card .pc-top { display: flex; align-items: center; gap: 0.85rem; }
+.player-card .avatar {
+  width: 42px; height: 42px; border-radius: 50%; flex: none;
+  background: var(--green-wash); color: var(--green);
+  display: grid; place-items: center; font-weight: 600; font-size: 0.95rem; letter-spacing: -0.01em;
+}
+.player-card .avatar.rookie { background: var(--bg-alt); color: var(--muted); }
+.player-card h3 { font-size: 1.12rem; letter-spacing: -0.02em; }
+.player-card .pc-sub { color: var(--muted); font-size: 0.82rem; font-weight: 500; margin-top: 0.1rem; }
+.player-card .pc-stats { margin-top: 1.15rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem 1rem; }
+.player-card .pc-stat .v { font-size: 1.15rem; font-weight: 600; color: var(--ink); letter-spacing: -0.02em; }
+.player-card .pc-stat .k { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.15rem; font-weight: 500; }
+.player-card .pc-foot { margin-top: 1.15rem; padding-top: 0.95rem; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+.player-card .pc-foot .k { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+.player-card .pc-foot .rc { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* ---- Leaderboard table ---- */
+.lb-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--white); }
+table.lb { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; min-width: 820px; }
+table.lb thead th {
+  position: sticky; top: 0; background: var(--white);
+  text-align: right; font-size: 0.74rem; font-weight: 600; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  padding: 0.95rem 0.85rem; border-bottom: 1px solid var(--line-strong);
+  cursor: pointer; user-select: none; white-space: nowrap; transition: color 0.2s var(--ease);
+}
+table.lb thead th:hover { color: var(--ink); }
+table.lb thead th.player-col, table.lb tbody td.player-col { text-align: left; }
+table.lb thead th .arrow { opacity: 0; margin-left: 0.3rem; font-size: 0.7rem; }
+table.lb thead th.sorted .arrow { opacity: 1; color: var(--green-brt); }
+table.lb thead th.sorted { color: var(--ink); }
+table.lb tbody td { text-align: right; padding: 0.85rem 0.85rem; border-bottom: 1px solid var(--line); font-size: 0.98rem; color: var(--ink-body); white-space: nowrap; }
+table.lb tbody tr:last-child td { border-bottom: none; }
+table.lb tbody tr { transition: background 0.15s var(--ease); }
+table.lb tbody tr:hover { background: var(--bg-alt); }
+table.lb td.player-col { font-weight: 600; color: var(--ink); }
+table.lb .rank { color: var(--muted); font-weight: 600; width: 2.4rem; text-align: right; padding-right: 0.4rem; }
+table.lb .medal { color: var(--gold); }
+table.lb td .pos { display: inline-block; }
+table.lb td.dim { color: var(--line-strong); }
+.lb-note { margin-top: 1rem; color: var(--muted); font-size: 0.85rem; }
+
+/* ---- Footer ---- */
+.footer { border-top: 1px solid var(--line); padding-block: 2.6rem; margin-top: var(--sect); }
+.footer-inner { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad); display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.footer .brand svg { width: 22px; height: 22px; }
+.footer p { color: var(--muted); font-size: 0.85rem; }
+
+/* ---- Reveal animation ---- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ---- Loading / empty ---- */
+.loading { color: var(--muted); text-align: center; padding: 3rem 0; font-size: 0.95rem; }
+
+/* ---- Responsive ---- */
+@media (max-width: 720px) {
+  body { font-size: 16px; }
+  .brand .brand-name { display: none; }
+  .trip-card { min-height: auto; }
+  .player-card .pc-stats { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 460px) {
+  .nav-links { gap: 1.05rem; }
+  .nav-links a { font-size: 0.9rem; }
+}
+
+  </style>
+</head>
+<body>
+  <div id="nav"></div>
+  <main id="app"><div class="loading">Loading…</div></main>
+  <div id="footer"></div>
+
+  <script>
+    window.__DATA = {"tournaments": [{"id": "sand-valley-shootout-2024", "name": "Sand Valley Shootout", "year": 2024, "date": "2024-05-04", "dateDisplay": "May 4, 2024", "courses": ["Sand Valley Resort-Sand Valley Course", "Mammoth Dunes", "The Lido"], "numRounds": 4, "players": [{"name": "Paul Akrouche", "handicap": 22.3, "role": "Player"}, {"name": "Todd Bushway", "handicap": 2.9, "role": "Player"}, {"name": "Derek Roschlein", "handicap": 9.1, "role": "Admin"}, {"name": "Conor O'Brien", "handicap": 12.2, "role": "Player"}, {"name": "Harry Washington", "handicap": 11.4, "role": "Owner"}, {"name": "Jason Weber", "handicap": 12.2, "role": "Player"}, {"name": "Edward Washington", "handicap": 13.3, "role": "Player"}, {"name": "Fred Akrouche", "handicap": 23.6, "role": "Player"}, {"name": "Devin Greaney", "handicap": 3.1, "role": "Player"}, {"name": "Tom Caruso", "handicap": 14.3, "role": "Player"}, {"name": "Cam Bushway", "handicap": 2.8, "role": "Player"}, {"name": "Joe Akrouche", "handicap": 11.8, "role": "Player"}], "leaderboard": {"gross": [{"player": "Cam Bushway", "rounds": ["+4", "-3", "+4", "+2"], "total": "+7"}, {"player": "Todd Bushway", "rounds": ["+6", "+2", "+3", "+3"], "total": "+14"}, {"player": "Devin Greaney", "rounds": ["+14", "+6", "+7", "+5"], "total": "+32"}, {"player": "Derek Roschlein", "rounds": ["+9", "+9", "+11", "+15"], "total": "+44"}, {"player": "Harry Washington", "rounds": ["+15", "+11", "+13", "+12"], "total": "+51"}, {"player": "Conor O'Brien", "rounds": ["+15", "+11", "+14", "+19"], "total": "+59"}, {"player": "Joe Akrouche", "rounds": ["+11", "+14", "+13", "+25"], "total": "+63"}, {"player": "Edward Washington", "rounds": ["+24", "+17", "+17", "+11"], "total": "+69"}, {"player": "Jason Weber", "rounds": ["+22", "+14", "+22", "+24"], "total": "+82"}, {"player": "Tom Caruso", "rounds": ["+24", "+16", "+23", "+24"], "total": "+87"}, {"player": "Paul Akrouche", "rounds": ["+30", "+27", "+25", "+17"], "total": "+99"}, {"player": "Fred Akrouche", "rounds": ["+36", "+28", "+37", "+18"], "total": "+119"}], "net": [{"player": "Cam Bushway", "rounds": ["+2", "-4", "+1", "+1"], "total": "E"}, {"player": "Todd Bushway", "rounds": ["+4", "+1", "E", "+2"], "total": "+7"}, {"player": "Harry Washington", "rounds": ["+4", "+2", "E", "+3"], "total": "+9"}, {"player": "Derek Roschlein", "rounds": ["E", "+2", "E", "+8"], "total": "+10"}, {"player": "Paul Akrouche", "rounds": ["+7", "+7", "-1", "-3"], "total": "+10"}, {"player": "Conor O'Brien", "rounds": ["+3", "+1", "E", "+9"], "total": "+13"}, {"player": "Edward Washington", "rounds": ["+11", "+6", "+2", "E"], "total": "+19"}, {"player": "Joe Akrouche", "rounds": ["-1", "+5", "-1", "+16"], "total": "+19"}, {"player": "Devin Greaney", "rounds": ["+11", "+5", "+3", "+4"], "total": "+23"}, {"player": "Fred Akrouche", "rounds": ["+12", "+7", "+10", "-3"], "total": "+26"}, {"player": "Tom Caruso", "rounds": ["+10", "+4", "+7", "+12"], "total": "+33"}, {"player": "Jason Weber", "rounds": ["+10", "+4", "+8", "+14"], "total": "+36"}]}, "ryderCup": {"teams": [{"team": "Team Todd", "total": "9.5", "players": [{"player": "Todd Bushway", "points_by_round": ["0", "1", "1", "0"]}, {"player": "Conor O'Brien", "points_by_round": ["1", "0", "0.5", "1"]}, {"player": "Edward Washington", "points_by_round": ["1", "0.5", "1", "1"]}, {"player": "Fred Akrouche", "points_by_round": ["0", "0.5", "0.5", "0.5"]}, {"player": "Harry Washington", "points_by_round": ["1", "1", "1", "1"]}, {"player": "Jason Weber", "points_by_round": ["1", "0", "1", "0"]}]}, {"team": "Team Cam", "total": "5.5", "players": [{"player": "Cam Bushway", "points_by_round": ["1", "1", "0", "1"]}, {"player": "Derek Roschlein", "points_by_round": ["0", "0.5", "0", "0"]}, {"player": "Devin Greaney", "points_by_round": ["0", "0", "0", "1"]}, {"player": "Joe Akrouche", "points_by_round": ["1", "1", "0.5", "0"]}, {"player": "Paul Akrouche", "points_by_round": ["0", "0.5", "0.5", "0.5"]}, {"player": "Tom Caruso", "points_by_round": ["0", "0", "0", "0"]}]}]}, "bestBall": null, "skins": null}, {"id": "cabot-classic-2025-2025", "name": "Cabot Classic 2025", "year": 2025, "date": "2025-10-02", "dateDisplay": "Oct 2, 2025", "courses": ["Cabot Cliffs", "Cabot Links"], "numRounds": 5, "players": [{"name": "Tim Watson", "handicap": 10.7, "role": "Player"}, {"name": "Joe Akrouche", "handicap": 12.1, "role": "Player"}, {"name": "Harry Washington", "handicap": 8.2, "role": "Owner"}, {"name": "Michael Edwards", "handicap": 15.2, "role": "Player"}, {"name": "Conor O'Brien", "handicap": 9.9, "role": "Player"}, {"name": "Derek Roschlein", "handicap": 8.2, "role": "Admin"}, {"name": "Fred Akrouche", "handicap": 20.8, "role": "Player"}, {"name": "Edward Washington", "handicap": 10.0, "role": "Player"}, {"name": "Cam Bushway", "handicap": 2.9, "role": "Player"}, {"name": "Tom Caruso", "handicap": 13.6, "role": "Player"}, {"name": "Dan Sullivan", "handicap": 17.5, "role": "Player"}, {"name": "John Berger", "handicap": 25.0, "role": "Player"}, {"name": "James O'Brien", "handicap": 17.5, "role": "Player"}, {"name": "Louis Massard", "handicap": 12.9, "role": "Player"}, {"name": "Todd Bushway", "handicap": 2.8, "role": "Player"}, {"name": "Dan Biscoe", "handicap": 5.4, "role": "Player"}], "leaderboard": {"gross": [{"player": "Cam Bushway", "rounds": ["+6", "+9", "+4", "+8", ""], "total": "+27"}, {"player": "Dan Biscoe", "rounds": ["+14", "+6", "+9", "+8", ""], "total": "+37"}, {"player": "Harry Washington", "rounds": ["+12", "+7", "+8", "+16", ""], "total": "+43"}, {"player": "Todd Bushway", "rounds": ["+14", "+8", "+15", "+13", ""], "total": "+50"}, {"player": "Derek Roschlein", "rounds": ["+13", "+7", "+15", "+16", ""], "total": "+51"}, {"player": "Tim Watson", "rounds": ["+19", "+8", "+12", "+18", ""], "total": "+57"}, {"player": "Conor O'Brien", "rounds": ["+15", "+19", "+18", "+13", ""], "total": "+65"}, {"player": "Joe Akrouche", "rounds": ["+19", "+19", "+18", "+14", ""], "total": "+70"}, {"player": "Edward Washington", "rounds": ["+25", "+18", "+16", "+19", ""], "total": "+78"}, {"player": "Michael Edwards", "rounds": ["+19", "+20", "+22", "+19", ""], "total": "+80"}, {"player": "Louis Massard", "rounds": ["+28", "+17", "+21", "+20", ""], "total": "+86"}, {"player": "Tom Caruso", "rounds": ["+22", "+22", "+17", "+25", ""], "total": "+86"}, {"player": "James O'Brien", "rounds": ["+24", "+22", "+26", "+26", ""], "total": "+98"}, {"player": "Dan Sullivan", "rounds": ["+26", "+29", "+22", "+22", ""], "total": "+99"}, {"player": "Fred Akrouche", "rounds": ["+34", "+28", "+31", "+29", ""], "total": "+122"}, {"player": "John Berger", "rounds": ["+27", "+30", "+39", "+36", ""], "total": "+132"}], "net": [{"player": "Harry Washington", "rounds": ["+3", "-2", "-1", "+7", ""], "total": "+7"}, {"player": "Tim Watson", "rounds": ["+8", "-4", "E", "+7", ""], "total": "+11"}, {"player": "Cam Bushway", "rounds": ["+2", "+6", "+1", "+4", ""], "total": "+13"}, {"player": "Dan Biscoe", "rounds": ["+8", "E", "+3", "+2", ""], "total": "+13"}, {"player": "Michael Edwards", "rounds": ["+3", "+3", "+5", "+3", ""], "total": "+14"}, {"player": "Derek Roschlein", "rounds": ["+4", "-2", "+6", "+7", ""], "total": "+15"}, {"player": "Joe Akrouche", "rounds": ["+6", "+6", "+5", "+1", ""], "total": "+18"}, {"player": "Conor O'Brien", "rounds": ["+4", "+8", "+7", "+2", ""], "total": "+21"}, {"player": "James O'Brien", "rounds": ["+6", "+3", "+7", "+8", ""], "total": "+24"}, {"player": "Dan Sullivan", "rounds": ["+8", "+10", "+3", "+4", ""], "total": "+25"}, {"player": "John Berger", "rounds": ["+1", "+3", "+12", "+10", ""], "total": "+26"}, {"player": "Tom Caruso", "rounds": ["+8", "+7", "+2", "+11", ""], "total": "+28"}, {"player": "Louis Massard", "rounds": ["+14", "+3", "+7", "+6", ""], "total": "+30"}, {"player": "Fred Akrouche", "rounds": ["+12", "+5", "+8", "+7", ""], "total": "+32"}, {"player": "Edward Washington", "rounds": ["+14", "+7", "+5", "+8", ""], "total": "+34"}, {"player": "Todd Bushway", "rounds": ["+10", "+5", "+12", "+9", ""], "total": "+36"}]}, "ryderCup": {"teams": [{"team": "Team Cam", "total": "11.5", "players": [{"player": "Cam Bushway", "points_by_round": ["1", "0", "1", "1", ""]}, {"player": "Harry Washington", "points_by_round": ["0", "1", "1", "0", ""]}, {"player": "Tom Caruso", "points_by_round": ["0", "1", "0.5", "0", ""]}, {"player": "Joe Akrouche", "points_by_round": ["0", "1", "1", "1", ""]}, {"player": "Conor O'Brien", "points_by_round": ["0", "1", "1", "1", ""]}, {"player": "Michael Edwards", "points_by_round": ["1", "0", "0", "0.5", ""]}, {"player": "John Berger", "points_by_round": ["1", "0.5", "0", "0", ""]}, {"player": "Tim Watson", "points_by_round": ["1", "0.5", "0.5", "1", ""]}]}, {"team": "Team Todd", "total": "8.5", "players": [{"player": "Todd Bushway", "points_by_round": ["1", "1", "0", "0", ""]}, {"player": "Dan Biscoe", "points_by_round": ["1", "0.5", "0.5", "1", ""]}, {"player": "Edward Washington", "points_by_round": ["0", "0", "1", "0", ""]}, {"player": "James O'Brien", "points_by_round": ["1", "1", "0", "0", ""]}, {"player": "Fred Akrouche", "points_by_round": ["0", "0", "0", "0", ""]}, {"player": "Derek Roschlein", "points_by_round": ["1", "0.5", "0", "1", ""]}, {"player": "Louis Massard", "points_by_round": ["0", "0", "1", "0.5", ""]}, {"player": "Dan Sullivan", "points_by_round": ["0", "0", "0.5", "1", ""]}]}]}, "bestBall": null, "skins": [{"player": "Cam Bushway", "rounds": ["8", "", "", "", ""], "total": "8"}, {"player": "Harry Washington", "rounds": ["6", "", "", "", ""], "total": "6"}, {"player": "Joe Akrouche", "rounds": ["4", "", "", "", ""], "total": "4"}]}], "upcoming": {"_comment": "Upcoming (not-yet-played) trips. Move a trip into tournaments.json once it has results.", "trips": [{"id": "sand-valley-2026", "name": "The Sequel at Sand Valley", "year": 2026, "date": "2026-10-15", "dateDisplay": "October 15\u201318, 2026", "courses": ["Sand Valley", "Mammoth Dunes", "Sedge Valley", "The Commons", "The Lido"], "upcoming": true}]}, "players": {"_comment": "Official crew records. ryderCup is the authoritative W-L-T (win=1, loss=0, tie=0.5). Players with no tournament appearances (e.g. new crew) can be listed here too.", "players": [{"name": "Harry Washington", "ryderCup": "6-2-0"}, {"name": "Conor O'Brien", "ryderCup": "5-3-0"}, {"name": "Joe Akrouche", "ryderCup": "5-3-0"}, {"name": "Cam Bushway", "ryderCup": "5-2-1"}, {"name": "Edward Washington", "ryderCup": "5-1-2"}, {"name": "Todd Bushway", "ryderCup": "4-4-0"}, {"name": "Derek Roschlein", "ryderCup": "2-4-2"}, {"name": "Louis Massard", "ryderCup": "2-2-0"}, {"name": "James O'Brien", "ryderCup": "2-2-0"}, {"name": "Jason Weber", "ryderCup": "2-2-0"}, {"name": "Dan Biscoe", "ryderCup": "2-0-2"}, {"name": "Tim Watson", "ryderCup": "2-0-2"}, {"name": "Dan Sullivan", "ryderCup": "2-0-2"}, {"name": "Devin Greaney", "ryderCup": "1-3-0"}, {"name": "John Berger", "ryderCup": "1-1-2"}, {"name": "Paul Akrouche", "ryderCup": "1-1-2"}, {"name": "Tom Caruso", "ryderCup": "0-7-1"}, {"name": "Fred Akrouche", "ryderCup": "0-6-2"}, {"name": "Michael Edwards", "ryderCup": "0-3-1"}, {"name": "Tyler Calos", "ryderCup": "0-0-0"}, {"name": "Mike McGrail", "ryderCup": "0-0-0"}]}};
+  </script>
+  <script>
+/* =========================================================================
+   Core: data loading, score parsing, stat aggregation.
+   Shared by every page. No dependencies.
+   ========================================================================= */
+
+const SITE = {
+  // Leave blank until the crew has a name; the nav shows the mark alone.
+  name: "",
+  tagline: "Great courses. Real competition. Twelve months of bragging rights.",
+  est: 2024,
+};
+
+/* ---- Data loading ---------------------------------------------------- */
+// Resolve data paths relative to the site root so pages in any folder work.
+
+async function loadData() {
+  return {
+    tournaments: (window.__DATA.tournaments || []).slice().sort((a, b) => (a.date || "").localeCompare(b.date || "")),
+    upcoming: (window.__DATA.upcoming.trips || []).slice().sort((a, b) => (a.date || "").localeCompare(b.date || "")),
+    playersMeta: window.__DATA.players.players || [],
+  };
+}
+
+/* ---- Score parsing --------------------------------------------------- */
+// "E" -> 0, "+12" -> 12, "-3" -> -3, "" -> null
+function parseScore(s) {
+  if (s === null || s === undefined) return null;
+  s = String(s).trim();
+  if (s === "") return null;
+  if (s.toUpperCase() === "E") return 0;
+  const n = Number(s.replace("+", ""));
+  return Number.isNaN(n) ? null : n;
+}
+
+// Format a to-par number back to display: 0 -> "E", 12 -> "+12", -3 -> "-3"
+function fmtToPar(n, decimals = 0) {
+  if (n === null || n === undefined || Number.isNaN(n)) return "\u2014";
+  const v = decimals ? Number(n.toFixed(decimals)) : Math.round(n);
+  if (v === 0) return "E";
+  return v > 0 ? `+${v}` : `${v}`;
+}
+
+function ordinal(n) {
+  if (n === null || n === undefined) return "\u2014";
+  const s = ["th", "st", "nd", "rd"], v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
+function initials(name) {
+  return name.split(/\s+/).map((p) => p[0]).slice(0, 2).join("").toUpperCase();
+}
+
+/* ---- Rankings within a single tournament ----------------------------- */
+// Returns Map<player, {score, rank}> using standard competition ranking.
+function rankBoard(entries) {
+  const scored = entries
+    .map((e) => ({ player: e.player, score: parseScore(e.total) }))
+    .filter((e) => e.score !== null)
+    .sort((a, b) => a.score - b.score);
+  const out = new Map();
+  let rank = 0, seen = 0, prev = null;
+  for (const row of scored) {
+    seen++;
+    if (row.score !== prev) { rank = seen; prev = row.score; }
+    out.set(row.player, { score: row.score, rank });
+  }
+  return out;
+}
+
+/* ---- Ryder Cup record parsing --------------------------------------- */
+// "6-2-0" -> {w:6,l:2,t:0, pts:6, played:8}
+function parseRyder(rec) {
+  if (!rec) return { w: 0, l: 0, t: 0, pts: 0, played: 0, display: "0-0-0" };
+  const [w, l, t] = rec.split("-").map((x) => parseInt(x, 10) || 0);
+  return { w, l, t, pts: w + 0.5 * t, played: w + l + t, display: rec };
+}
+
+/* ---- All-time aggregation ------------------------------------------- */
+// Builds one row per player across all played tournaments.
+function buildAllTime(data) {
+  const { tournaments, playersMeta } = data;
+  const players = new Map();
+
+  const ensure = (name) => {
+    if (!players.has(name)) {
+      players.set(name, {
+        name,
+        trips: 0,
+        grossWins: 0, netWins: 0,
+        bestGross: null, bestNet: null,
+        grossTotals: [], netTotals: [],
+        lastHandicap: null,
+        ryder: parseRyder(null),
+      });
+    }
+    return players.get(name);
+  };
+
+  // Seed from meta (captures crew with 0 trips + authoritative Ryder records)
+  for (const m of playersMeta) {
+    const p = ensure(m.name);
+    if (m.ryderCup) p.ryder = parseRyder(m.ryderCup);
+  }
+
+  for (const t of tournaments) {
+    const grossRank = rankBoard(t.leaderboard.gross || []);
+    const netRank = rankBoard(t.leaderboard.net || []);
+
+    // Roster presence = appeared on the trip
+    const roster = new Set((t.players || []).map((p) => p.name));
+    for (const rp of (t.players || [])) {
+      const p = ensure(rp.name);
+      if (rp.handicap !== null && rp.handicap !== undefined) p.lastHandicap = rp.handicap;
+    }
+    for (const name of roster) ensure(name).trips++;
+
+    for (const [name, info] of grossRank) {
+      const p = ensure(name);
+      p.grossTotals.push(info.score);
+      p.bestGross = p.bestGross === null ? info.rank : Math.min(p.bestGross, info.rank);
+      if (info.rank === 1) p.grossWins++;
+    }
+    for (const [name, info] of netRank) {
+      const p = ensure(name);
+      p.netTotals.push(info.score);
+      p.bestNet = p.bestNet === null ? info.rank : Math.min(p.bestNet, info.rank);
+      if (info.rank === 1) p.netWins++;
+    }
+  }
+
+  const rows = [...players.values()].map((p) => ({
+    ...p,
+    avgGross: p.grossTotals.length ? p.grossTotals.reduce((a, b) => a + b, 0) / p.grossTotals.length : null,
+    avgNet: p.netTotals.length ? p.netTotals.reduce((a, b) => a + b, 0) / p.netTotals.length : null,
+    rcPts: p.ryder.pts,
+  }));
+
+  return rows;
+}
+
+/* ---- Champions per tournament --------------------------------------- */
+function championsFor(t) {
+  const g = rankBoard(t.leaderboard.gross || []);
+  const n = rankBoard(t.leaderboard.net || []);
+  const winner = (map) => [...map.entries()].find(([, v]) => v.rank === 1)?.[0] || null;
+  return { gross: winner(g), net: winner(n) };
+}
+
+/* ---- Shared chrome: nav + footer ------------------------------------ */
+const MARK = `<svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+  <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.4"/>
+  <path d="M13 8.5v15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M13 8.6c3.4-1.9 5.6 1.2 8.4-.2v6.2c-2.8 1.4-5-1.7-8.4.2" fill="currentColor" opacity="0.9"/>
+  <circle cx="13" cy="24" r="1.5" fill="currentColor"/>
+</svg>`;
+
+function renderNav(active) {
+  const links = [
+    { href: "#home", label: "Home", key: "home" },
+    { href: "#players", label: "Players", key: "players" },
+    { href: "#leaderboard", label: "Leaderboard", key: "leaderboard" },
+  ];
+  const name = SITE.name
+    ? `<span class="brand-name">${SITE.name}</span>` : "";
+  return `<nav class="nav"><div class="nav-inner">
+    <a class="brand" href="#home" aria-label="Home" style="color:var(--green)">${MARK}${name}</a>
+    <div class="nav-links">
+      ${links.map((l) => `<a href="${l.href}" class="${l.key === active ? "active" : ""}">${l.label}</a>`).join("")}
+    </div>
+  </div></nav>`;
+}
+
+function renderFooter() {
+  const yr = new Date().getFullYear();
+  return `<footer class="footer"><div class="footer-inner">
+    <a class="brand" href="#home" style="color:var(--green)">${MARK}</a>
+    <p>${SITE.tagline}</p>
+    <p>Est. ${SITE.est} \u00b7 &copy; ${yr}</p>
+  </div></footer>`;
+}
+
+function mountChrome(active) {
+  const navEl = document.getElementById("nav");
+  const footEl = document.getElementById("footer");
+  if (navEl) navEl.outerHTML = renderNav(active);
+  if (footEl) footEl.outerHTML = renderFooter();
+}
+
+/* ---- Scroll reveal --------------------------------------------------- */
+function initReveal() {
+  const els = document.querySelectorAll(".reveal");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!("IntersectionObserver" in window) || reduce) {
+    els.forEach((el) => el.classList.add("in"));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: "0px 0px -30px 0px" });
+  els.forEach((el) => io.observe(el));
+  // Fail-safe: reveal anything already in the viewport on load immediately,
+  // and unconditionally reveal everything after a short delay so no content
+  // can ever be left stuck at opacity:0 (e.g. if the observer misses it).
+  requestAnimationFrame(() => {
+    document.querySelectorAll(".reveal:not(.in)").forEach((el) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("in");
+    });
+  });
+  setTimeout(() => {
+    document.querySelectorAll(".reveal:not(.in)").forEach((el) => el.classList.add("in"));
+  }, 1400);
+}
+
+  </script>
+  <script>
+(function(){
+window.__pages = window.__pages || {};
+/* Home: hero for the next trip, the trip lineup (history + upcoming), stats. */
+
+const ICON = {
+  pin: `<svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>`,
+  cal: `<svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="16" rx="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17M8 3.5v3M16 3.5v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+  flag: `<svg viewBox="0 0 24 24" fill="none"><path d="M6 21V4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6 4.5c3-1.6 5 1 8-.2v6.4c-3 1.2-5-1.4-8 .2" fill="currentColor"/></svg>`,
+};
+
+const CONTOURS = `<svg class="hero-contours" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <g fill="none" stroke="#14432f" stroke-width="1">
+    <path d="M-40 470 C 220 400, 340 500, 600 430 S 1020 360, 1260 440" opacity="0.10"/>
+    <path d="M-40 430 C 240 350, 360 460, 600 385 S 1030 305, 1260 400" opacity="0.09"/>
+    <path d="M-40 390 C 260 300, 380 420, 600 340 S 1040 250, 1260 360" opacity="0.08"/>
+    <path d="M-40 350 C 280 250, 400 380, 600 295 S 1050 195, 1260 320" opacity="0.07"/>
+    <path d="M-40 310 C 300 205, 420 340, 600 250 S 1060 140, 1260 280" opacity="0.06"/>
+    <path d="M-40 270 C 320 160, 440 300, 600 205 S 1070 90, 1260 240" opacity="0.05"/>
+    <path d="M-40 230 C 340 120, 460 260, 600 165 S 1080 45, 1260 205" opacity="0.04"/>
+  </g>
+</svg>`;
+
+function daysUntil(iso) {
+  const target = new Date(iso + "T00:00:00");
+  const now = new Date();
+  const ms = target - now;
+  return Math.max(0, Math.ceil(ms / 86400000));
+}
+
+function heroFor(next) {
+  if (!next) {
+    return `<section class="hero"><div class="hero-inner">
+      <p class="eyebrow">The Annual Trip</p>
+      <h1>Great courses.<br/>Better company.</h1>
+      <p class="sub">${SITE.tagline}</p>
+    </div></section>`;
+  }
+  const days = daysUntil(next.date);
+  return `<section class="hero">
+    ${CONTOURS}
+    <div class="hero-inner">
+      <p class="eyebrow">Next Trip \u00b7 ${next.dateDisplay}</p>
+      <h1>${next.name}</h1>
+      <p class="sub">Five courses over four days across the Sand Valley sandscape.</p>
+      <div class="countdown" aria-label="Countdown to the next trip">
+        <div class="unit"><div class="num">${days}</div><div class="lbl">Days to go</div></div>
+      </div>
+      <div class="meta">
+        <span>${ICON.pin} ${next.courses.join(" \u00b7 ")}</span>
+      </div>
+    </div>
+  </section>`;
+}
+
+function tripCard(trip, champs) {
+  if (trip.upcoming) {
+    return `<article class="trip-card reveal">
+      <div class="tc-head">
+        <div class="year">${trip.year}</div>
+        <div class="status next">Next</div>
+      </div>
+      <h3>${trip.name}</h3>
+      <div class="courses">${trip.courses.join(" \u00b7 ")}</div>
+      <div class="when">${trip.dateDisplay}<small>Save the dates</small></div>
+    </article>`;
+  }
+  const champRow = (label, name) => `<div class="champ-row">
+    <span class="k">${ICON.flag && `<span class="flag">${ICON.flag}</span>`}${label}</span>
+    <span class="v">${name || "\u2014"}</span>
+  </div>`;
+  return `<article class="trip-card reveal">
+    <div class="tc-head">
+      <div class="year">${trip.year}</div>
+      <div class="status done">Complete</div>
+    </div>
+    <h3>${trip.name}</h3>
+    <div class="courses">${(trip.courses || []).join(" \u00b7 ")}</div>
+    <div class="champs">
+      ${champRow("Gross champion", champs.gross)}
+      ${champRow("Net champion", champs.net)}
+    </div>
+  </article>`;
+}
+
+function statBand(data, allTime) {
+  const trips = data.tournaments.length;
+  const playersPlayed = allTime.filter((p) => p.trips > 0).length;
+  const rounds = data.tournaments.reduce((a, t) => a + (t.numRounds || 0), 0);
+  return `<div class="statband">
+    <div class="stat reveal"><div class="n">${trips}</div><div class="l">Trips played</div></div>
+    <div class="stat reveal"><div class="n">${playersPlayed}</div><div class="l">Competitors</div></div>
+    <div class="stat reveal"><div class="n">${rounds}</div><div class="l">Rounds contested</div></div>
+    <div class="stat reveal"><div class="n">${data.tournaments.reduce((a,t)=>a+(t.courses?.length||0),0)}</div><div class="l">Courses conquered</div></div>
+  </div>`;
+}
+
+async function main() {
+  mountChrome("home");
+  const app = document.getElementById("app");
+  try {
+    const data = await loadData();
+    const allTime = buildAllTime(data);
+    const next = data.upcoming[0] || null;
+
+    // Lineup: played (desc by date) + upcoming, most recent/next first
+    const played = [...data.tournaments].reverse();
+    const cards = [];
+    for (const trip of data.upcoming) cards.push(tripCard(trip, {}));
+    for (const trip of played) cards.push(tripCard(trip, championsFor(trip)));
+
+    app.innerHTML = `
+      ${heroFor(next)}
+
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">The Lineup</p>
+            <h2>Every trip, one place.</h2>
+            <p>A different destination every year \u2014 with the results, champions, and record book that come with it.</p>
+          </div>
+          <div class="lineup">${cards.join("")}</div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="wrap">
+          <div class="section-head center">
+            <p class="eyebrow">By the Numbers</p>
+            <h2>The record so far.</h2>
+          </div>
+          ${statBand(data, allTime)}
+        </div>
+      </section>
+    `;
+    initReveal();
+  } catch (err) {
+    app.innerHTML = `<section class="section"><div class="wrap"><p class="loading">Couldn\u2019t load trip data. If you\u2019re previewing locally, run a local server (see README) \u2014 browsers block file access otherwise.</p></div></section>`;
+    console.error(err);
+  }
+}
+
+window.__pages["home"] = main;
+
+})();
+  </script>
+  <script>
+(function(){
+window.__pages = window.__pages || {};
+/* Players: a clean card grid, one per crew member, with career stats. */
+
+function playerCard(p) {
+  const rookie = p.trips === 0;
+  const av = `<div class="avatar ${rookie ? "rookie" : ""}">${initials(p.name)}</div>`;
+  const sub = rookie
+    ? "Yet to tee it up"
+    : `${p.trips} ${p.trips === 1 ? "trip" : "trips"}${p.lastHandicap != null ? ` \u00b7 ${p.lastHandicap} hcp` : ""}`;
+
+  const stat = (v, k) => `<div class="pc-stat"><div class="v">${v}</div><div class="k">${k}</div></div>`;
+
+  const stats = rookie
+    ? stat("\u2014", "Best gross") + stat("\u2014", "Best net") + stat("\u2014", "Gross wins") + stat("\u2014", "Net wins")
+    : stat(ordinal(p.bestGross), "Best gross") +
+      stat(ordinal(p.bestNet), "Best net") +
+      stat(p.grossWins, "Gross wins") +
+      stat(p.netWins, "Net wins");
+
+  return `<article class="player-card reveal">
+    <div class="pc-top">${av}<div><h3>${p.name}</h3><div class="pc-sub">${sub}</div></div></div>
+    <div class="pc-stats">${stats}</div>
+    <div class="pc-foot"><span class="k">Ryder Cup (W\u2011L\u2011T)</span><span class="rc">${p.ryder.display}</span></div>
+  </article>`;
+}
+
+async function main() {
+  mountChrome("players");
+  const app = document.getElementById("app");
+  try {
+    const data = await loadData();
+    const rows = buildAllTime(data);
+
+    // Sort: most trips, then best net finish, then name. Rookies fall to the end.
+    rows.sort((a, b) =>
+      (b.trips - a.trips) ||
+      ((a.bestNet ?? 99) - (b.bestNet ?? 99)) ||
+      a.name.localeCompare(b.name)
+    );
+
+    const veterans = rows.filter((p) => p.trips > 0);
+    const rookies = rows.filter((p) => p.trips === 0);
+
+    app.innerHTML = `
+      <section class="hero"><div class="hero-inner">
+        <p class="eyebrow">The Field</p>
+        <h1>The players.</h1>
+        <p class="sub">Every competitor \u2014 appearances, best finishes, and where they stand in the Ryder Cup ledger.</p>
+      </div></section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="players-grid">${veterans.map(playerCard).join("")}</div>
+          ${rookies.length ? `
+            <div class="section-head" style="margin-top:var(--sect)">
+              <p class="eyebrow">On the Tee</p>
+              <h2>Awaiting their debut.</h2>
+              <p>On the crew, not yet on the board.</p>
+            </div>
+            <div class="players-grid">${rookies.map(playerCard).join("")}</div>
+          ` : ""}
+        </div>
+      </section>
+    `;
+    initReveal();
+  } catch (err) {
+    app.innerHTML = `<section class="section"><div class="wrap"><p class="loading">Couldn\u2019t load player data. If previewing locally, run a local server (see README).</p></div></section>`;
+    console.error(err);
+  }
+}
+
+window.__pages["players"] = main;
+
+})();
+  </script>
+  <script>
+(function(){
+window.__pages = window.__pages || {};
+/* All-Time Leaderboard: one sortable table combining every stat we track. */
+
+const COLUMNS = [
+  { key: "name",      label: "Player",     type: "text",  player: true },
+  { key: "trips",     label: "Trips",      type: "num",   dir: "desc" },
+  { key: "grossWins", label: "Gross W",    type: "num",   dir: "desc" },
+  { key: "netWins",   label: "Net W",      type: "num",   dir: "desc" },
+  { key: "bestGross", label: "Best Gross", type: "pos",   dir: "asc" },
+  { key: "bestNet",   label: "Best Net",   type: "pos",   dir: "asc" },
+  { key: "avgGross",  label: "Avg Gross",  type: "par",   dir: "asc" },
+  { key: "avgNet",    label: "Avg Net",    type: "par",   dir: "asc" },
+  { key: "ryderDisp", label: "Ryder Cup",  type: "text2", dir: "desc", sortBy: "rcPts" },
+  { key: "rcPts",     label: "RC Pts",     type: "pts",   dir: "desc" },
+];
+
+let STATE = { rows: [], sortKey: "netWins", sortDir: "desc" };
+
+function cellValue(row, col) {
+  switch (col.type) {
+    case "text":  return `<td class="player-col">${row.name}</td>`;
+    case "text2": return `<td>${row.ryder.display}</td>`;
+    case "num":   return `<td>${row[col.key]}</td>`;
+    case "pts":   return `<td>${row.rcPts % 1 ? row.rcPts.toFixed(1) : row.rcPts}</td>`;
+    case "pos": {
+      const v = row[col.key];
+      if (v === null) return `<td class="dim">\u2014</td>`;
+      const medal = v === 1 ? ' medal' : '';
+      return `<td><span class="pos${medal}">${ordinal(v)}</span></td>`;
+    }
+    case "par": {
+      const v = row[col.key];
+      return v === null ? `<td class="dim">\u2014</td>` : `<td>${fmtToPar(v, 1)}</td>`;
+    }
+    default: return `<td>\u2014</td>`;
+  }
+}
+
+function sortRows() {
+  const col = COLUMNS.find((c) => (c.sortBy || c.key) === STATE.sortKey) ||
+              COLUMNS.find((c) => c.key === STATE.sortKey);
+  const key = STATE.sortKey;
+  const dir = STATE.sortDir === "asc" ? 1 : -1;
+
+  const val = (r) => {
+    if (key === "name") return r.name.toLowerCase();
+    if (key === "rcPts") return r.rcPts;
+    const v = r[key];
+    return v;
+  };
+
+  STATE.rows.sort((a, b) => {
+    let av = val(a), bv = val(b);
+    // Nulls always sink to the bottom regardless of direction.
+    const an = av === null || av === undefined;
+    const bn = bv === null || bv === undefined;
+    if (an && bn) return a.name.localeCompare(b.name);
+    if (an) return 1;
+    if (bn) return -1;
+    if (typeof av === "string") return dir * av.localeCompare(bv);
+    if (av === bv) {
+      // stable tiebreak: fewer avg strokes, then name
+      const at = a.avgNet ?? 999, bt = b.avgNet ?? 999;
+      return (at - bt) || a.name.localeCompare(b.name);
+    }
+    return dir * (av - bv);
+  });
+}
+
+function render() {
+  sortRows();
+  const thead = COLUMNS.map((c) => {
+    const sk = c.sortBy || c.key;
+    const sorted = sk === STATE.sortKey;
+    const arrow = sorted ? (STATE.sortDir === "asc" ? "\u2191" : "\u2193") : "";
+    return `<th data-key="${sk}" class="${c.player ? "player-col " : ""}${sorted ? "sorted" : ""}">${c.label}<span class="arrow">${arrow}</span></th>`;
+  }).join("");
+
+  const body = STATE.rows.map((row, i) => {
+    const rankCell = `<td class="rank">${i + 1}</td>`;
+    const cells = COLUMNS.map((c) => cellValue(row, c)).join("");
+    return `<tr>${rankCell.replace("<td", "<td").replace("</td>", "</td>")}${cells}</tr>`;
+  }).join("");
+
+  document.getElementById("lb-mount").innerHTML = `
+    <div class="lb-scroll">
+      <table class="lb">
+        <thead><tr><th class="rank" style="cursor:default"></th>${thead}</tr></thead>
+        <tbody>${body}</tbody>
+      </table>
+    </div>
+    <p class="lb-note">Tap any column to sort. Ryder Cup shown as wins\u2011losses\u2011ties (win = 1 pt, tie = \u00bd). Scoring averages are to par across scored trips.</p>
+  `;
+
+  document.querySelectorAll("table.lb thead th[data-key]").forEach((th) => {
+    th.addEventListener("click", () => {
+      const key = th.dataset.key;
+      const col = COLUMNS.find((c) => (c.sortBy || c.key) === key);
+      if (STATE.sortKey === key) {
+        STATE.sortDir = STATE.sortDir === "asc" ? "desc" : "asc";
+      } else {
+        STATE.sortKey = key;
+        STATE.sortDir = col?.dir || "desc";
+      }
+      render();
+    });
+  });
+}
+
+async function main() {
+  mountChrome("leaderboard");
+  const app = document.getElementById("app");
+  try {
+    const data = await loadData();
+    STATE.rows = buildAllTime(data).filter((p) => p.trips > 0); // board = those who've played
+
+    app.innerHTML = `
+      <section class="hero"><div class="hero-inner">
+        <p class="eyebrow">The Record Book</p>
+        <h1>All-time leaderboard.</h1>
+        <p class="sub">Wins, best finishes, scoring averages, and the Ryder Cup ledger \u2014 across every trip, in one table.</p>
+      </div></section>
+
+      <section class="section">
+        <div class="wrap"><div id="lb-mount"></div></div>
+      </section>
+    `;
+    render();
+  } catch (err) {
+    app.innerHTML = `<section class="section"><div class="wrap"><p class="loading">Couldn\u2019t load leaderboard data. If previewing locally, run a local server (see README).</p></div></section>`;
+    console.error(err);
+  }
+}
+
+window.__pages["leaderboard"] = main;
+
+})();
+  </script>
+  <script>
+    // Simple hash router: #players, #leaderboard, else home.
+    function route() {
+      const h = (location.hash || '').replace('#','') || 'home';
+      const page = ['home','players','leaderboard'].includes(h) ? h : 'home';
+      document.getElementById('app').innerHTML = '<div class="loading">Loading…</div>';
+      window.__pages[page]();
+    }
+    window.addEventListener('hashchange', route);
+    route();
+  </script>
+</body>
+</html>
